@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.org/dtd/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+	<table-filter match-name="book" match-catalog="bookstoredb2"></table-filter>
+	<table-filter match-name="book_order"
+		match-catalog="bookstoredb2">
+	</table-filter>
+	<table-filter match-name="category" match-catalog="bookstoredb2"></table-filter>
+	<table-filter match-name="customer" match-catalog="bookstoredb2"></table-filter>
+	<table-filter match-name="order_detail"
+		match-catalog="bookstoredb2">
+	</table-filter>
+	<table-filter match-name="review" match-catalog="bookstoredb2"></table-filter>
+	<table-filter match-name="users" match-catalog="bookstoredb2"></table-filter>
+</hibernate-reverse-engineering>

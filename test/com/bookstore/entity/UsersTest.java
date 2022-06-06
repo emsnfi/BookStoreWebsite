@@ -1,3 +1,4 @@
+package com.bookstore.entity;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 
@@ -12,9 +13,9 @@ public class UsersTest {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Users user1 = new Users();
-		user1.setEmail("name@codejava.net");
-		user1.setFullname("Emily");
-		user1.setPassword("helloworld");
+		user1.setEmail("crafd@gmail.com");
+		user1.setFullname("cliff");
+		user1.setPassword("ccolf43dsfsd");
 		
 		
 		// 建立 entitymanager factory
