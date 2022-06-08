@@ -13,9 +13,9 @@ public class UsersTest {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Users user1 = new Users();
-		user1.setEmail("crafd@gmail.com");
-		user1.setFullname("cliff");
-		user1.setPassword("ccolf43dsfsd");
+		user1.setEmail("john@gmail.com");
+		user1.setFullname("John Hung");
+		user1.setPassword("cfdd44sdsfsd");
 		
 		
 		// 建立 entitymanager factory

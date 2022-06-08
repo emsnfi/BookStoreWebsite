@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bookstore.service.UserServices;
+import com.bookstore.entity.Users;
+
+import java.util.*;
 
 /**
  * Servlet implementation class ListUserServlet
@@ -33,15 +36,10 @@ public class ListUserServlet extends HttpServlet {
 		
 		//要從 servlet class 傳 User 的資料 到 JSP
 		UserServices userServices = new UserServices();
-		userServices.listUser();
-		
-		// 轉位址
-		String listpage = "user_list.jsp";
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher(listpage);
-		requestDispatcher.forward(request,response);
+		userServices.listUser(request, response,null);
 	
 	}
-
+ 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
