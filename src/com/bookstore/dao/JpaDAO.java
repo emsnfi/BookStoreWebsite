@@ -3,6 +3,7 @@ package com.bookstore.dao;
 import javax.persistence.*;
 
 import java.util.List;
+import java.util.Map;
 
 // for any type
 public class JpaDAO<E> {
@@ -80,6 +81,22 @@ public class JpaDAO<E> {
 		Query query = entityManager.createNamedQuery(queryName);
 		return query.getResultList();
 		
+	}
+	// 有要承接 parameter 的 function
+//	public List<E> findWithNamedQuery(String queryName, Map<String,Object> parameters){
+//		Query query = entityManager.createNamedQuery(queryName);
+//		// 使用泛型 因為有可能被其他 class 重複使用
+//		
+//		query.setParameter(0, query);
+//		}
+	
+	public List<E> findWithNamedQuery(String queryName, String parameterName,Object paramValue){
+		Query query = entityManager.createNamedQuery(queryName);
+		// 使用泛型 因為有可能被其他 class 重複使用
+		
+		query.setParameter(parameterName, paramValue);
+		return query.getResultList();
+	
 	}
 	
 	// count

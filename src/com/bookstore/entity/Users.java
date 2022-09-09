@@ -2,11 +2,16 @@ package com.bookstore.entity;
 
 import javax.persistence.*;
 
+// JPQL 語法
+// parameter 名稱以 : 開頭
+
+
 @Entity
 @Table(name="users") 
 @NamedQueries({
 	@NamedQuery(name ="Users.findAll",query="Select u from Users u Order by u.fullname"),
-	@NamedQuery(name="Users.countAll",query="Select Count(u) from Users u")
+	@NamedQuery(name="Users.countAll",query="Select Count(u) from Users u"),
+	@NamedQuery(name="Users.findByEmail",query="Select u from Users u where u.email = :email ")
 })
 public class Users {  // 用複數 而非使用 user 因為 user 是 mysql 的 reserved keyword 所以要避免
 	private  Integer userId; // 要 mapping 到 database 的 column 要使用 jpa annotation
@@ -21,6 +26,16 @@ public class Users {  // 用複數 而非使用 user 因為 user 是 mysql 的 r
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	public Users(Integer userId,String email, String fullname, String password) {
+//		super();
+//		this.email = email;
+//		this.fullname = fullname;
+//		this.password = password;
+		this(email,fullname,password); //call 下方的 constructor
+		this.userId = userId;
+	}
+	
 	// 給 create user 的 contructor
 	public Users(String email, String fullname, String password) {
 		super();

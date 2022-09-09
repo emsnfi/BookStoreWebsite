@@ -34,6 +34,16 @@ public class UserDAO extends JpaDAO<Users> implements GenericDAO<Users> {
 	
 		return super.find(Users.class, userId);
 	}
+	// 有需要帶入的參數 
+	public Users findByEmail(String email) {
+		//findWithNameQuery 第二個參數就是 User.java 中設定的 NamedQuery 要帶入的名稱
+		 List<Users> listUsers = super.findWithNamedQuery("Users.findByEmail","email",email);
+		 if(listUsers != null && listUsers.size()==1) {
+			 return listUsers.get(0); // 第一個 index 值
+		 }
+		 return null;
+		 
+	}
 
 	@Override
 	public void delete(Object userId) {
@@ -55,6 +65,7 @@ public class UserDAO extends JpaDAO<Users> implements GenericDAO<Users> {
 		return super.countWithNamedQuery("Users.countAll");
 	}
  
+	
 	
 	
 }

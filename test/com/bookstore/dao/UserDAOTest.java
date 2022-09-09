@@ -128,6 +128,13 @@ public class UserDAOTest {
 		assertEquals(5,totalUsers);
 	}
 	
+	@Test // tesst findemail
+	public void testFindEmail() {
+		String email = "name@codejava.net";
+		Users user = userDAO.findByEmail(email);
+		// 假定會有 所以使用 assertNotNull
+		assertNotNull(user);
+	}
 	@AfterClass // clean the resource
 	public static void tearDownClass() {
 		entityManager.close();

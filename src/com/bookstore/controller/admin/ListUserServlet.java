@@ -35,8 +35,8 @@ public class ListUserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//要從 servlet class 傳 User 的資料 到 JSP
-		UserServices userServices = new UserServices();
-		userServices.listUser(request, response,null);
+		UserServices userServices = new UserServices(request, response);
+		userServices.listUser();
 	
 	}
  

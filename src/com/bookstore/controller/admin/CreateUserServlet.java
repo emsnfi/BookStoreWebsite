@@ -20,9 +20,9 @@ public class CreateUserServlet extends HttpServlet {
 		// 這邊對應到 jsp 會使用
 		// 會抓 webservlet url 傳過來的資料
 
-		UserServices userServices = new UserServices();
-		userServices.createUser(request,response);
-		userServices.listUser(request,response,"New user create successfully");
+		UserServices userServices = new UserServices(request,response );
+		userServices.createUser();
+		
 	
 	}
 
