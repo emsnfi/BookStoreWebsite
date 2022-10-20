@@ -12,6 +12,7 @@
 
 <jsp:include page="header.jsp"></jsp:include>
 
+<%-- <jsp:directive.include file="header.jsp"></jsp:include> --%>
 
 <div align="center">
 		<h3>${eromessage}</h3>

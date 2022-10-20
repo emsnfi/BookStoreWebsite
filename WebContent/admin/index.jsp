@@ -8,7 +8,8 @@
 </head>
 <body>
 
-	<jsp:include page="header.jsp"></jsp:include>
+<%-- 	<jsp:include page="header.jsp"></jsp:include> --%>
+	<jsp:directive.include file="header.jsp" />
 
 	<div align="center">
 		<h1>Administrative Dashboard</h1>

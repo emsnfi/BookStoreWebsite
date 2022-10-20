@@ -34,7 +34,7 @@ public class UserServices {
 	}
 
 	// 不同參數的 function
-	public  void listUser()
+	public  void listUser() // 沒有給任何參數的
 	throws ServletException, IOException
 		{
 		listUser(null);
@@ -70,20 +70,20 @@ public class UserServices {
 		String fullname = request.getParameter("fullName");
 		String password = request.getParameter("password");
 		
-		// 確認 email
+		// 確認 email 是否有重複 有時候 create 的時候 email 會重複
 		Users existUser = userDAO.findByEmail(email);
 		if(existUser != null) { // 如果有 則導向其他頁
 			String eromessage = "Could not create user.</br> A user with email " 
 					+ email +" already exists";
-			
+			// setAttribute 的概念是 從 request 中設定一個名稱的參數
 			request.setAttribute("eromessage", eromessage);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("message.jsp");
 			dispatcher.forward(request, response);
 		}
 		else { // 如果沒有 則可以正常創建
 			Users newUser = new Users(email,fullname,password);
-			userDAO.create(newUser);
-			listUser("New User created successfully");
+			userDAO.create(newUser); // 呼叫 userdao 中的 create 操作資料庫
+			listUser("New User "+ email +" created successfully");
 		}
 		
 	}
@@ -140,17 +140,29 @@ public class UserServices {
 	public void deleteUser() throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		int userId = Integer.parseInt(request.getParameter("id"));
-		if(userId == 1) { // admin 所以不能刪除
-			String msg = "User admin can not be deleted";
+		String msg = "";
+		if(userId == 1) { // admin 所以不能刪除 也可以做在 client side 但是 hacker 可以透過
+			// url 的方式刪除 delete_user?id=1
+			msg = "User admin can not be deleted";
 			request.setAttribute("eromessage", msg);
 			request.getRequestDispatcher("message.jsp").forward(request, response);
 			return;
 			
 		}
 		
-		userDAO.delete(userId);
-		String deletemessage = "User "+ userId + " has been deleted successfully";
-		listUser(deletemessage);
+		Users user = userDAO.get(userId);
+		if(user == null) { // 如果同時有 admin 已經先瀏覽過 user 並刪除 id 了，則會顯示這個
+			msg = "Could not find user" + userId + ", or it might be deleted by another admin";
+			request.setAttribute("erromessage",msg);
+			request.getRequestDispatcher("message.jsp").forward(request, response);
+			return;
+		}
+		else { 
+			userDAO.delete(userId);
+			msg = "User "+ userId + " has been deleted successfully";
+			listUser(msg); // list user message page
+		}
+		
 	
 	}
 	

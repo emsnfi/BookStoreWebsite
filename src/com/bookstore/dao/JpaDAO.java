@@ -60,7 +60,7 @@ public class JpaDAO<E> {
 			entityManager.refresh(entity);;
 			
 		}
-		
+		// 根據 id 找相對應的 object
 		return entity;
 	}
 	// 刪除物件

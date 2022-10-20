@@ -17,18 +17,20 @@ import com.bookstore.entity.Users;
 
 // other util
 import java.util.*;
-public class UserDAOTest {
-
-	private static EntityManagerFactory entityManagerFactory; // 查詢取用範圍
-	private static EntityManager entityManager;
+public class UserDAOTest extends BaseDAOTest{
+	// need entity manager
+	// 因為所有要跟資料庫串接的動作都需要 entity manager 所以把下列宣告的部分統一放在一個 class 中
+//	private static EntityManagerFactory entityManagerFactory; // 查詢取用範圍
+//	private static EntityManager entityManager;
 	private static UserDAO userDAO;
 
 	@BeforeClass
 	// 可以初始化一些 resource 避免後面測試重複宣告等
 	// 例如 entityManager 的 create and close
-	public static void setupClass() {
-		entityManagerFactory = Persistence.createEntityManagerFactory("BookStoreWebsite");
-		entityManager = entityManagerFactory.createEntityManager();
+	public static void setupClass() throws Exception {
+//		entityManagerFactory = Persistence.createEntityManagerFactory("BookStoreWebsite");
+//		entityManager = entityManagerFactory.createEntityManager();
+		BaseDAOTest.setUpBeforeClass();
 		userDAO = new UserDAO(entityManager);
 	}
 
@@ -66,6 +68,7 @@ public class UserDAOTest {
 
 	@Test
 	public void testUpdateUsers() {
+		// 所有欄位的 delete 都要測過
 		Users user = new Users();
 		user.setUserId(1);
 		user.setEmail("emsnfi@gmail.com"); // 雖然沒有改變 但還是要寫，不然會變成 null
@@ -137,8 +140,8 @@ public class UserDAOTest {
 	}
 	@AfterClass // clean the resource
 	public static void tearDownClass() {
-		entityManager.close();
-		entityManagerFactory.close();
+
+		BaseDAOTest.tearDownClass();
 
 	}
 }

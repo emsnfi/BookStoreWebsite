@@ -63,7 +63,7 @@
 		const confirmbool = confirm("Are you sure you want to delete the user ID " + userId + "?");
 		if(confirmbool){
 			
-			window.location = "delete_user?id=" + userId;
+			window.location = "delete_user?id=" + userId; // call java servlet call the property of the current windows to the url of java servlet
 		}  
 		
 

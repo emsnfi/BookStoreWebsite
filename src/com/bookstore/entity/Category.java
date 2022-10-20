@@ -21,18 +21,21 @@ import javax.persistence.Table;
 @Table(name = "category", catalog = "bookstoredb2")
 @NamedQueries({
 	@NamedQuery(name = "Category.findAll", query = "SELECT c FROM Category c ORDER BY c.name"),
-	@NamedQuery(name = "Category.countAll", query = "SELECT COUNT(*) FROM Category"),
+	@NamedQuery(name = "Category.countAll", query = "SELECT COUNT(c) FROM Category c"), //SELECT COUNT(*) FROM Category will be wrong
 	@NamedQuery(name = "Category.findByName", query = "SELECT c FROM Category c WHERE c.name = :name")
 })
 public class Category implements java.io.Serializable {
-
+	// 不太懂為什麼要整個 set 的變數
 	private Integer categoryId;
 	private String name;
+	// 為什麼 <> 後面是 0 原因是因為 default 是 16，因此如果沒有放資料的話會
+	// 維持 0，可以省空間 The default initial capacity is 16, 
+	// so by passing in 0 you may save a few bytes of memory if you end up not putting anything in the set.
 	private Set<Book> books = new HashSet<Book>(0);
 
 	public Category() {
 	}
-
+	// 只有放 name 
 	public Category(String name) {
 		this.name = name;
 	}
