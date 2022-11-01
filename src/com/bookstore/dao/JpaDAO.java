@@ -76,8 +76,8 @@ public class JpaDAO<E> {
 		
 		entityManager.getTransaction().commit();		
 	} 
-	//List 物件
-	public List<E> findWithNameQuery(String queryName){
+	//List 物件 只給入尋找元素的 string
+	public List<E> findWithNamedQuery(String queryName){
 		Query query = entityManager.createNamedQuery(queryName);
 		return query.getResultList();
 		
@@ -89,7 +89,7 @@ public class JpaDAO<E> {
 //		
 //		query.setParameter(0, query);
 //		}
-	
+	// query name 就是在 entity 中定義的 query 名稱 例如：user.findbyname
 	public List<E> findWithNamedQuery(String queryName, String parameterName,Object paramValue){
 		Query query = entityManager.createNamedQuery(queryName);
 		// 使用泛型 因為有可能被其他 class 重複使用

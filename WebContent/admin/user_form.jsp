@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <link href="" rel="stylesheet">
-<title></title>
+<title>Create New User</title>
 </head>
 <body>
 

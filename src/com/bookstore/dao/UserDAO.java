@@ -56,7 +56,7 @@ public class UserDAO extends JpaDAO<Users> implements GenericDAO<Users> {
 	public List<Users> listAll() {
 		// TODO Auto-generated method stub
 		// 放 User.java 中 要使用的 namequery 的 name
-		return super.findWithNameQuery("Users.findAll");
+		return super.findWithNamedQuery("Users.findAll");
 	}
 
 	@Override

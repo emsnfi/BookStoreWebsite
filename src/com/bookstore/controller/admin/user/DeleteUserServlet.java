@@ -1,4 +1,4 @@
-package com.bookstore.controller.admin;
+package com.bookstore.controller.admin.user;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,11 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.bookstore.service.*;
 
+import com.bookstore.controller.admin.*;
 /**
  * Servlet implementation class DeleteUserServlet
  */
 @WebServlet("/admin/delete_user")
-public class DeleteUserServlet extends HttpServlet {
+public class DeleteUserServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -29,7 +30,7 @@ public class DeleteUserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		// call user service 中的 method
-		UserServices userservice = new UserServices(request,response);
+		UserServices userservice = new UserServices(entityManager,request,response);
 		userservice.deleteUser();
 		
 		

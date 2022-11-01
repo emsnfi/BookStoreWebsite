@@ -1,4 +1,4 @@
-package com.bookstore.controller.admin;
+package com.bookstore.controller.admin.user;
 
 import java.io.IOException;
 
@@ -13,12 +13,12 @@ import com.bookstore.service.UserServices;
 import com.bookstore.entity.Users;
 
 import java.util.*;
-
+import com.bookstore.controller.admin.*; // for entend base servlet
 /**
  * Servlet implementation class ListUserServlet
  */
 @WebServlet("/admin/list_users")
-public class ListUserServlet extends HttpServlet {
+public class ListUserServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
         
     /**
@@ -35,7 +35,7 @@ public class ListUserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//要從 servlet class 傳 User 的資料 到 JSP
-		UserServices userServices = new UserServices(request, response);
+		UserServices userServices = new UserServices(entityManager,request, response);
 		userServices.listUser();
 
 	

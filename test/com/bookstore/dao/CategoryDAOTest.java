@@ -104,5 +104,23 @@ public class CategoryDAOTest extends BaseDAOTest{
 		long totalCategoryCount = categoryDao.count();
 		assertEquals(4,totalCategoryCount);
 	}
+	
+	@Test
+	public void testfindByName() { 
+		
+		// need to create the finding method in the entity method
+		// java name query
+		// @NamedQuery(name = "Category.findByName", query = "SELECT c FROM Category c WHERE c.name = :name")
+		// in category entity class
+		// :name 表示 parameter of name
+		
+		// call super class (JPA dao) 中 find with name query
+		// public List<E> findWithNamedQuery(String queryName, String parameterName,Object paramValue)
+
+		String categoryName = "Politicses"; // suspose to exist
+		Category cat = categoryDao.findByName(categoryName);
+		assertNull(cat);
+	}
+	
 
 }

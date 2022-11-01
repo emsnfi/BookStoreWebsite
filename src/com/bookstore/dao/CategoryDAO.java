@@ -45,7 +45,7 @@ public class CategoryDAO extends JpaDAO<Category> implements GenericDAO<Category
 		// need to create named query entity
 		// @NamedQuery(name = "Category.findAll", query = "SELECT c FROM Category c ORDER BY c.name"),
 		
-		return super.findWithNameQuery("Category.findAll");
+		return super.findWithNamedQuery("Category.findAll");
 	
 	
 	}
@@ -56,5 +56,25 @@ public class CategoryDAO extends JpaDAO<Category> implements GenericDAO<Category
 		return super.countWithNamedQuery("Category.countAll");
 		
 	}
+	
+	public Category findByName(String categoryName) { 
+		
+		// need to create the finding method in the entity method
+		// java name query
+		// @NamedQuery(name = "Category.findByName", query = "SELECT c FROM Category c WHERE c.name = :name")
+		// in category entity class
+		// :name 表示 parameter of name
+		
+		// call super class (JPA dao) 中 find with name query
+		// public List<E> findWithNamedQuery(String queryName, String parameterName,Object paramValue)
+		List<Category> result = super.findWithNamedQuery("Category.findByName","name",categoryName);
+		
+		if(result != null && result.size() > 0) { // if yes 
+			return result.get(0);
+		}
+		
+		return null;
+	}
+
 
 }

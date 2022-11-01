@@ -14,7 +14,8 @@ import java.util.*;
 public class UserServices {
 	
 
-	private EntityManagerFactory entityManagerFactory;
+//	private EntityManagerFactory entityManagerFactory;
+	// 因為在 servlet 中有一個 base servlet 可以去繼承跟 access
 	private EntityManager entityManager;
 	private UserDAO userDAO;
 	private HttpServletRequest request;
@@ -22,12 +23,15 @@ public class UserServices {
 	
 	
 	// create constructor from super class
-	public UserServices(HttpServletRequest request,HttpServletResponse response) {
+	public UserServices(EntityManager entityManager,HttpServletRequest request,HttpServletResponse response) {
 		// persistence name 
 		this.request = request;
 		this.response = response;
-		entityManagerFactory = Persistence.createEntityManagerFactory("BookStoreWebsite"); 
-		entityManager = entityManagerFactory.createEntityManager();
+//		entityManagerFactory = Persistence.createEntityManagerFactory("BookStoreWebsite"); 
+//		entityManager = entityManagerFactory.createEntityManager();
+		
+		
+		this.entityManager = entityManager;
 		
 		userDAO = new UserDAO(entityManager);
 		
@@ -74,7 +78,7 @@ public class UserServices {
 		Users existUser = userDAO.findByEmail(email);
 		if(existUser != null) { // 如果有 則導向其他頁
 			String eromessage = "Could not create user.</br> A user with email " 
-					+ email +" already exists";
+					+ email +" has already exists";
 			// setAttribute 的概念是 從 request 中設定一個名稱的參數
 			request.setAttribute("eromessage", eromessage);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("message.jsp");
