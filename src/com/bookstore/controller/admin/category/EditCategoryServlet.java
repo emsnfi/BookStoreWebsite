@@ -32,7 +32,7 @@ public class EditCategoryServlet extends BaseServlet {
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		CategoryServices categoryService = new CategoryServices(entityManager,request,response);
-		
+		categoryService.editCategory();
 	}
 
 	/**

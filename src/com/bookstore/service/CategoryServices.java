@@ -99,7 +99,21 @@ public class CategoryServices {
 
 	}
 	
-	public void editCategory() {
+	public void editCategory() throws ServletException, IOException{
+		int categoryId = Integer.parseInt(request.getParameter("id"));
+		Category category = categoryDAO.get(categoryId);
+		
+		// request attribute
+		// setAttribute(name,value) value 為對應到 前端要傳入的數值
+		// 這邊為 category_form 會使用到的 category value
+		// 前端要引入 <!-- 為引用 jstl  -->	
+//		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+		request.setAttribute("category",category);
+		
+		// after define, ues dispatcher to pass
+		String editPage = "category_form.jsp";
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher(editPage); 
+		requestDispatcher.forward(request, response);
 		
 	}
 
