@@ -3,11 +3,10 @@ package com.bookstore.service;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.ServletException;
 import java.io.IOException;
 import java.util.*;
 import com.bookstore.dao.CategoryDAO;
