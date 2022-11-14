@@ -38,7 +38,7 @@ public class CategoryServices {
 		categoryDAO = new CategoryDAO(entityManager);
 	}
 
-	// 實作 list category
+	// 實作 list category no message to pass in
 	public void listCategory() throws ServletException, IOException {
 
 		// 串接 dao
@@ -114,6 +114,41 @@ public class CategoryServices {
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(editPage); 
 		requestDispatcher.forward(request, response);
 		
+		
+		
+	}
+	
+	public void updateCategory() throws ServletException,IOException{
+		int categoryId = Integer.parseInt(request.getParameter("categoryId"));
+		String categoryName = request.getParameter("name"); 
+		
+//		Category category = categoryDAO.get(categoryId); // current selected category
+		
+		Category categoryById = categoryDAO.get(categoryId);
+		Category categoryByName = categoryDAO.findByName(categoryName); // 從輸入的 category name catch the object
+		
+		// if category name 不是空的 表示已經有該 category name (重複), if id diff to the id 表示是指不同的物件項目
+		// 如果是相同的物件項目 則 category name 就會是一樣，所以要排除這個可能性
+		if(categoryByName != null && categoryById.getCategoryId() != categoryByName.getCategoryId()) {
+			String eromessage = "Could not update category." + 
+					"A category with name "+ categoryName +" already exists.";
+			
+			// name,value
+			request.setAttribute("eromessage",eromessage);
+			
+			String path = "message.jsp";
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher(path);
+			requestDispatcher.forward(request, response);
+		}
+		else {
+			// or we can update it
+			categoryById.setName(categoryName); // 將抓取到的 id 使用 set name 方式更改 category name
+			categoryDAO.update(categoryById);
+			String message = "Category " + categoryName +" has updated successfully!";
+			
+			
+			listCategory(message);
+		}
 	}
 
 }

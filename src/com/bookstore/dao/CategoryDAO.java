@@ -20,7 +20,7 @@ public class CategoryDAO extends JpaDAO<Category> implements GenericDAO<Category
 
 	@Override
 	public Category update(Category category) {
-		// TODO Auto-generated method stub
+		
 		return super.update(category);
 	}
 
@@ -28,7 +28,7 @@ public class CategoryDAO extends JpaDAO<Category> implements GenericDAO<Category
 	public Category get(Object id) { // should be intger
 		// JPADAO 的 method
 		// public E find(Class<E> type, Object id) 
-		// TODO Auto-generated method stub
+
 		return super.find(Category.class,id);
 	}
 
