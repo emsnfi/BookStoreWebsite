@@ -101,17 +101,29 @@ public class CategoryServices {
 	public void editCategory() throws ServletException, IOException{
 		int categoryId = Integer.parseInt(request.getParameter("id"));
 		Category category = categoryDAO.get(categoryId);
+		String despage ="";
+		// have to check whether it exist
+		if(category != null) {
+			request.setAttribute("category",category);
+			
+			
+			// after define, ues dispatcher to pass
+			 despage = "category_form.jsp";
+			
+		}
+		else { // possible scenerio :admin1 & admin2 can view at same time and admin1 delete the category
+			// while admin2 edit the category, which has been deleted
+			String message = "Could not find the category, it might be deleted~";
+			request.setAttribute("message", message);
+			despage = "messge.jsp";
+		}
 		
 		// request attribute
 		// setAttribute(name,value) value 為對應到 前端要傳入的數值
 		// 這邊為 category_form 會使用到的 category value
 		// 前端要引入 <!-- 為引用 jstl  -->	
 //		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-		request.setAttribute("category",category);
-		
-		// after define, ues dispatcher to pass
-		String editPage = "category_form.jsp";
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher(editPage); 
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher(despage); 
 		requestDispatcher.forward(request, response);
 		
 		
@@ -131,7 +143,7 @@ public class CategoryServices {
 		// 如果是相同的物件項目 則 category name 就會是一樣，所以要排除這個可能性
 		if(categoryByName != null && categoryById.getCategoryId() != categoryByName.getCategoryId()) {
 			String eromessage = "Could not update category." + 
-					"A category with name "+ categoryName +" already exists.";
+					" A category with name "+ categoryName +" already exists.";
 			
 			// name,value
 			request.setAttribute("eromessage",eromessage);
@@ -149,6 +161,18 @@ public class CategoryServices {
 			
 			listCategory(message);
 		}
+	}
+	
+	public void deleteCategory() throws ServletException,IOException{
+		// first get the category id
+		int categoryId = Integer.parseInt(request.getParameter("id")); // why is id? others are categoryId
+		categoryDAO.delete(categoryId);
+//		Category category = categoryDAO.get(categoryId);
+		
+		String message ="The category with ID " + categoryId + " has been removed successfully.";
+		listCategory(message);
+		
+		// leave the checking for books belongs to category later-> because catgory can have one or more book
 	}
 
 }

@@ -61,12 +61,12 @@
 	 
 	<script>
 	
-	function confirmDelete(userId) {
+	function confirmDelete(categoryId) {
 		// 如果按下 ok 則會顯示 true
-		const confirmbool = confirm("Are you sure you want to delete the user ID " + userId + "?");
+		const confirmbool = confirm("Are you sure you want to delete the category ID " + categoryId + "?");
 		if(confirmbool){
 			
-			window.location = "delete_user?id=" + userId; // call java servlet call the property of the current windows to the url of java servlet
+			window.location = "delete_category?id=" + categoryId; // call java servlet call the property of the current windows to the url of java servlet
 		}  
 		
 
